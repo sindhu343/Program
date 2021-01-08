@@ -1,0 +1,110 @@
+
+import java.io.File;  
+import java.io.FileNotFoundException;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+public class Proj {
+  public static void main(String[] args) {
+	  String da1[]=new String[1000];
+	  String da11[]=new String[1000];
+	  String para[]=new String[124456];
+	  String e = null,f = null;
+    try {
+      File myObj = new File("C:\\Users\\SINDHU\\Desktop\\sin11.txt");
+      Scanner myReader = new Scanner(myObj);
+      while (myReader.hasNextLine()) {
+    	  for(int k=0;k<124456;k++) {
+        String data = myReader.nextLine();
+        para[k]=data;
+    	  }
+    	  //for(int k=0;k<124456;k++)
+             // System.out.println(para[k]);
+      }
+      myReader.close();
+          File myObj1 = new File("C:\\Users\\SINDHU\\Desktop\\find.txt");
+          Scanner myReader1 = new Scanner(myObj1);
+          while (myReader1.hasNextLine()) {
+        	  for(int i=0;i<1000;i++) {
+            String data1 = myReader1.nextLine();
+            da1[i]=data1;
+        	  }
+          }
+          //for(int i=0;i<1000;i++)
+             // System.out.println(da1[i]);
+      myReader1.close();
+      File myObj11 = new File("C:\\Users\\SINDHU\\Desktop\\french.txt");
+      Scanner myReader11 = new Scanner(myObj11);
+      while (myReader11.hasNextLine()) {
+    	  for(int j=0;j<1000;j++) {
+        String data11 = myReader11.nextLine();
+            da11[j]=data11;
+    	  }
+      }
+      Map<String,Integer> mp=new TreeMap<>();
+      TreeSet<String> at=new TreeSet<String>();
+      for(int j=0;j<1000;j++)
+         System.out.println(da11[j]);
+  myReader11.close();
+  int count=0;
+	  for(int j=0;j<124456;j++) {
+		  String a=para[j];
+		  String h[]=a.split(" ");
+		  for(int y=0;y<h.length;y++)
+		  {
+			  int flag=0;
+			  for(int i=0;i<1000;i++) {
+				  String b=da11[i];
+				  String p[]=b.split(",");
+					  e=p[0];
+					  f=p[1];
+			  if(h[y].equals(e))
+			  {
+				  flag=1;
+				  count++;
+				  System.out.print(f+" ");
+				  at.add(h[y]);
+			  }
+			  else if(h[y].equalsIgnoreCase(e))
+			  {
+				  flag=1;
+				  count++;
+				  System.out.print(f+" ");
+				  at.add(h[y]);
+			  }
+		  }
+			  if(flag==0)
+				  System.out.print(h[y]+" ");
+			  if(mp.containsKey(h[y])) {
+				  mp.put(h[y], mp.get(h[y]+1));
+			  }
+			  else {
+				  mp.put(h[y],1);
+			  }
+	  }
+		  System.out.println(" ");
+	  }
+		  /*for(Map.Entry<String,Integer> entry: 
+              mp.entrySet())
+           {
+      System.out.println(entry.getKey()+
+              " - "+entry.getValue());
+  }*/
+	  System.out.println("Unique list of words that was replaced with French words from the dictionary :");
+	  System.out.println(at);
+ System.out.println("Number of times a word was replace "+count);
+    }
+    
+      catch (FileNotFoundException e1) {
+      System.out.println("An error occurred.");
+      e1.printStackTrace();
+  }
+    Runtime rt=Runtime.getRuntime();
+    System.out.println("Time taken to process "+rt);
+    //System.out.println(rt.totalMemory());
+    //System.out.println(rt.freeMemory());
+    System.out.println("Memory taken to process "+(rt.totalMemory()-rt.freeMemory()));
+}
+}
